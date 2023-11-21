@@ -1,0 +1,15 @@
+div {
+    width: 928px;
+    height: 42px;
+    background-color: #4482FF;
+    margin-left: auto;
+    margin-right: auto;
+    text-align: center;
+}
+
+#title {
+    color: #FFF;
+    font-family: 'Inter', sans-serif;
+    font-size: 24px;
+    font-weight: 700;
+}

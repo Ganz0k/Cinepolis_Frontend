@@ -1,0 +1,52 @@
+.menu {
+    display: flex;
+}
+
+.cartelera {
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    margin: 0 auto; /* Esto centrará la cartelera en la página */
+    max-width: 800px; /* Esto limitará el ancho máximo de la cartelera */
+}
+
+.cartelera .movie {
+    box-sizing: border-box;
+    width: calc(25% - 20px);
+    margin: 5px;
+    padding: 10px;
+    text-align: center;
+    text-decoration: none;
+    overflow: hidden;
+}
+
+.cartelera .movie img {
+    width: 140px;
+    height: 205px;
+    object-fit: cover;
+    display: block;
+    margin: 0 auto;
+    cursor: pointer;
+}
+
+.cartelera .movie:hover {
+    background-color: #f0f0f0;
+}
+
+.opciones button {
+    background-color: #EEC233;
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-top: 20px;
+    border-radius: 5px;
+}
+
+#btn-aniadir {
+    margin-left: 8%;
+}
+
+#btn-eliminar {
+    margin-left: 5%;
+}

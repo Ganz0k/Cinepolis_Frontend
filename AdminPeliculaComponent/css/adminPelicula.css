@@ -1,0 +1,103 @@
+.pelicula-container {
+    margin-top: 52px;
+    display: flex;
+}
+
+.pelicula-details {
+    padding-left: 3%;
+}
+
+.image-editor {
+    padding-left: 24px;
+}
+
+.image-editor img {
+    width: 314px;
+    height: 430px;
+}
+
+.image-editor input[type="file"] {
+    display: none;
+}
+
+.custom-upload-button {
+    background-color: #EEC233;
+    border-radius: 5px;
+    border: 1px solid #000;
+    color: #000;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    cursor: pointer;
+    margin-left: 15%;
+}
+
+.sections {
+    display: flex;
+    margin-bottom: 2%;
+}
+
+.label {
+    color: #000;
+    width: 118px;
+    text-align: right;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+#titulo {
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    margin-left: 1%;
+}
+
+#sinopsis-text {
+    width: 793px;
+    height: 238px;
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: justify;
+    margin-left: 1%;
+}
+
+#precio {
+    height: 24px;
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    margin-top: 1%;
+    margin-left: 1%;
+}
+
+#horarios {
+    display: flex;
+}
+
+#horarios table {
+    padding-left: 10%;
+}
+
+#horarios table td {
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+button {
+    background-color: #EEC233;
+    border-radius: 5px;
+    color: #000;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    margin-left: 80%;
+    margin-top: 5%;
+    margin-bottom: 10%;
+}

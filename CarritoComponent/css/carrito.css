@@ -1,0 +1,71 @@
+button {
+    background-color: #EEC233;
+    border-radius: 5px;
+    color: #000;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+}
+
+h2 {
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+p {
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+}
+
+.buttons-box {
+    width: 928px;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+#btn-pay-all {
+    margin-left: 128px;
+}
+
+#btn-delete-selected {
+    margin-left: 128px;
+}
+
+.boletos-box {
+    width: 1036px;
+    margin-left: auto;
+    margin-right: auto;
+    margin-top: 74px;
+}
+
+.boleto {
+    background-color: #D9D9D9;
+    width: 1036px;
+    display: flex;
+    margin-bottom: 34px;
+}
+
+.boleto img {
+    width: 103px;
+    height: 157px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.pelicula-details {
+    width: 607px;
+    padding-left: 35px;
+}
+
+#sinopsis {
+    text-align: justify;
+    width: 407px;
+}
+
+.precio-details {
+    width: 165px;
+    padding-left: 10%;
+}

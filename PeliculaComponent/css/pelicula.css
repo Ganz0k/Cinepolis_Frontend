@@ -1,0 +1,110 @@
+.pelicula-container {
+    margin-top: 52px;
+    display: flex;
+}
+
+.pelicula-details {
+    padding-left: 3%;
+}
+
+img {
+    width: 314px;
+    height: 430px;
+    padding-left: 24px;
+}
+
+#titulo {
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 36px;
+    font-weight: 700;
+    margin-top: -.9%;
+}
+
+#sinopsis-label {
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+}
+
+#sinopsis-text {
+    width: 793px;
+    background-color: #D9D9D9;
+    margin-top: -3%;
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+    text-align: justify;
+}
+
+#horarios {
+    display: flex;
+}
+
+#horarios p {
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+}
+
+#horarios table {
+    padding-left: 10%;
+}
+
+#horarios table td {
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 20px;
+    font-weight: 400;
+}
+
+#boletos {
+    display: flex;
+    height: 100px;
+}
+
+#boletos button {
+    width: 38px;
+    height: 38px;
+    margin-top: 4%;
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    background-color: #D9D9D9;
+}
+
+#boletos-label {
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    font-weight: 400;
+}
+
+#cantidad {
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+    text-align: center;
+    width: 38px;
+    height: 38px;
+}
+
+#btn-menos {
+    margin-left: 5%;
+}
+
+#btn-escoger-asiento {
+    background-color: #EEC233;
+    border-radius: 5px;
+    color: #000;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+    margin-left: 30%;
+    margin-bottom: 10%;
+}

@@ -1,0 +1,27 @@
+<link rel="stylesheet" href="./CarritoComponent/css/carrito.css">
+
+<div class="boletos-box"></div>
+
+<div class="buttons-box">
+    <button id="btn-pay-selected">Pagar seleccionados</button>
+    <button id="btn-pay-all">Pagar todo el carrito</button>
+    <button id="btn-delete-selected">Eliminar seleccionados</button>
+</div>
+
+<template id="tem-boleto">
+    <div class="boleto">
+        <input type="checkbox">
+        <img src="#" alt="#" id="imagen-pelicula">
+
+        <div class="pelicula-details">
+            <h2 id="titulo">?</h2>
+            <p id="sinopsis">...</p>
+        </div>
+        
+        <div class="precio-details">
+            <p>Boletos agregados: <span id="total-boletos">?</span></p>
+            <p>Total:</p>
+            <h2 id="precio">?</h2>
+        </div>
+    </div>
+</template>

@@ -1,0 +1,92 @@
+button {
+    background-color: #EEC233;
+    border-radius: 5px;
+    color: #000;
+    font-size: 20px;
+    font-weight: 700;
+    font-family: 'Inter', sans-serif;
+}
+
+h2 {
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 32px;
+    font-weight: 700;
+}
+
+p {
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 16px;
+}
+
+.boleto {
+    background-color: #D9D9D9;
+    width: 1036px;
+    display: flex;
+    margin-top: 3%;
+    margin-left: auto;
+    margin-right: auto;
+}
+
+.boleto img {
+    width: 103px;
+    height: 157px;
+    margin-top: auto;
+    margin-bottom: auto;
+}
+
+.pelicula-details {
+    width: 607px;
+    padding-left: 35px;
+}
+
+#sinopsis {
+    text-align: justify;
+    width: 407px;
+}
+
+.precio-details {
+    width: 165px;
+    padding-left: 10%;
+}
+
+.pago {
+    width: 486px;
+    margin-left: auto;
+    margin-right: auto;
+    border: 1px solid #000;
+    border-radius: 10px;
+    margin-top: 5%;
+}
+
+.metodos-container {
+    display: flex;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.metodo img {
+    width: 120px;
+    height: 120px;
+}
+
+.metodo {
+    margin-left: 10%;
+}
+
+#label-form {
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 26px;
+    padding-left: 12%;
+}
+
+#btn-comprar {
+    margin-left: 5%;
+    margin-bottom: 5%;
+}
+
+#btn-cancelar {
+    margin-left: 20%;
+}
