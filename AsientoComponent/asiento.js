@@ -92,7 +92,7 @@ export default class AsientoComponent extends HTMLElement {
             console.log(asientosSeleccionados);
 
             if (asientosSeleccionados !== null && asientosSeleccionados.length === numBoletos) {
-                page(`/frontend/checkOut?id=${idPelicula}&titulo=${titulo}&sinopsis=${sinopsis}&asientos=${asientosSeleccionados}&imagen=${imagenURL}&horario=${horario}`);
+                page(`/checkOut?id=${idPelicula}&titulo=${titulo}&sinopsis=${sinopsis}&asientos=${asientosSeleccionados}&imagen=${imagenURL}&horario=${horario}`);
             }
         });
     }

@@ -25,7 +25,7 @@ export default class SignUpComponent extends HTMLElement {
         let botonInicioSesion = shadow.querySelector("#btn-login");
 
         botonInicioSesion.addEventListener("click", function () {
-            page("/frontend/iniciarSesion");
+            page("/iniciarSesion");
         });
     }
 }

@@ -40,7 +40,7 @@ export default class CarteleraComponent extends HTMLElement {
 
                     clone = template.content.cloneNode(true);
                     element = clone.querySelector("a");
-                    element.setAttribute("href", `/frontend/pelicula?id=${pelicula._id}&imagen=${url}`);
+                    element.setAttribute("href", `/pelicula?id=${pelicula._id}&imagen=${url}`);
 
                     element = clone.querySelector("img");
                     element.setAttribute("src", url);

@@ -13,12 +13,12 @@ import CheckOutComponent from "./CheckOutComponent/checkOut.js";
 import AdminMenuComponent from "./AdminMenuComponent/adminMenu.js";
 
 document.addEventListener("DOMContentLoaded", function () {
-    page("/frontend/index.html", () => showCartelera());
-    page("/frontend/iniciarSesion", () => showLogin());
-    page("/frontend/registrarse", () => showSignUp());
-    page("/frontend/pelicula", () => showPelicula());
-    page("/frontend/asientos", () => showAsientos());
-    page("/frontend/checkOut", () => showCheckOut());
+    page("/index.html", () => showCartelera());
+    page("/iniciarSesion", () => showLogin());
+    page("/registrarse", () => showSignUp());
+    page("/pelicula", () => showPelicula());
+    page("/asientos", () => showAsientos());
+    page("/checkOut", () => showCheckOut());
 
     page();
 });

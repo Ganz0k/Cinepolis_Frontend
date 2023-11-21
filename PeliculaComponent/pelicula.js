@@ -69,7 +69,7 @@ export default class PeliculaComponent extends HTMLElement {
             radios.forEach(radio => {
                 if (radio.checked) {
                     radioSeleccionado = radio.value;
-                    page(`/frontend/asientos?id=${idPelicula}&imagen=${imagenURL}&titulo=${titulo}&sinopsis=${sinopsis}&horario=${radioSeleccionado}&numBoletos=${cantidad.innerHTML}`);
+                    page(`/asientos?id=${idPelicula}&imagen=${imagenURL}&titulo=${titulo}&sinopsis=${sinopsis}&horario=${radioSeleccionado}&numBoletos=${cantidad.innerHTML}`);
                 }
             });
         });

@@ -25,7 +25,7 @@ export default class LoginComponent extends HTMLElement {
         let botonRegistro = shadow.querySelector("#register-button");
 
         botonRegistro.addEventListener("click", function () {
-            page("/frontend/registrarse");
+            page("/registrarse");
         });
     }
 }
