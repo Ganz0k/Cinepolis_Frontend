@@ -19,6 +19,7 @@ document.addEventListener("DOMContentLoaded", function () {
     page("/pelicula", () => showPelicula());
     page("/asientos", () => showAsientos());
     page("/checkOut", () => showCheckOut());
+    page("/boletoComprado", () => showBoletoComprado());
 
     page();
 });
@@ -89,9 +90,22 @@ function showCheckOut() {
 
     body.innerHTML = `
         <header-info></header-info>
+        
+        <section-title></section-title>
+        <check-out></check-out>
+
+        <footer-info></footer-info>
+    `;
+}
+
+function showBoletoComprado() {
+    const body = document.querySelector("body");
+
+    body.innerHTML = `
+        <header-info></header-info>
         <section-title></section-title>
 
-        <check-out></check-out>
+        <boleto-info></boleto-info>
 
         <footer-info></footer-info>
     `;

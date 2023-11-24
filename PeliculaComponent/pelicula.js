@@ -45,6 +45,9 @@ export default class PeliculaComponent extends HTMLElement {
                 for (let i = 0; i < data.horarios.length; i++) {
                     celdas[i].innerHTML = `<input type="radio" name="horario" value="${data.horarios[i]}"> ${data.horarios[i]}`;
                 }
+            })
+            .catch(error => {
+                alert(error);
             });
     }
 
@@ -65,13 +68,19 @@ export default class PeliculaComponent extends HTMLElement {
             let tabla = shadow.querySelector("table");
             let radios = tabla.querySelectorAll('input[name="horario"]');
             let radioSeleccionado;
+            let numSeleccionados = 0;
 
             radios.forEach(radio => {
                 if (radio.checked) {
+                    numSeleccionados++;
                     radioSeleccionado = radio.value;
                     page(`/asientos?id=${idPelicula}&imagen=${imagenURL}&titulo=${titulo}&sinopsis=${sinopsis}&horario=${radioSeleccionado}&numBoletos=${cantidad.innerHTML}`);
                 }
             });
+
+            if (numSeleccionados === 0) {
+                alert("Seleccione un asiento antes de continuar");
+            }
         });
 
         btnMas.addEventListener("click", function () {

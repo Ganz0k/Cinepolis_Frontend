@@ -48,6 +48,9 @@ export default class CarteleraComponent extends HTMLElement {
 
                     div.appendChild(clone);
                 });
+            })
+            .catch(error => {
+                alert(error);
             });
     }
 }

@@ -41,14 +41,17 @@ export default class AsientoComponent extends HTMLElement {
             .then(response => response.json())
             .then(data => {
                 data.forEach(boleto => {
-                    let partesFecha = boleto.horario.toLocaleString().split(", ");
-                    horario += ":00";
+                    let timestamp = Date.parse(boleto.horario);
+                    let fecha = new Date(timestamp);
 
-                    if (horario === partesFecha[1]) {
+                    if (parseInt(horario.split(":")[0]) === fecha.getHours()) {
                         let asientoOcupado = shadow.querySelector(`[data-seat="${boleto.asiento}"]`);
                         asientoOcupado.setAttribute("class", "seat-occupied");
                     }
                 });
+            })
+            .catch(error => {
+                alert(error);
             });
     }
 
@@ -68,7 +71,7 @@ export default class AsientoComponent extends HTMLElement {
                     numSeleccionados = seleccionados.length;
                 }
                 
-                if ((a.getAttribute("class") === "seat") && (numSeleccionados < numBoletos)) {
+                if ((a.getAttribute("class") === "seat") && (numSeleccionados < parseInt(numBoletos))) {
                     a.setAttribute("class", "seat-selected");
                 } else if (a.getAttribute("class") === "seat-selected") {
                     a.setAttribute("class", "seat");
@@ -89,9 +92,8 @@ export default class AsientoComponent extends HTMLElement {
 
         btnComprar.addEventListener("click", function () {
             let asientosSeleccionados = Array.from(shadow.querySelectorAll(".seat-selected")).map(seat => seat.getAttribute("data-seat"));
-            console.log(asientosSeleccionados);
 
-            if (asientosSeleccionados !== null && asientosSeleccionados.length === numBoletos) {
+            if (asientosSeleccionados !== null && asientosSeleccionados.length === parseInt(numBoletos)) {
                 page(`/checkOut?id=${idPelicula}&titulo=${titulo}&sinopsis=${sinopsis}&asientos=${asientosSeleccionados}&imagen=${imagenURL}&horario=${horario}`);
             }
         });

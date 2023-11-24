@@ -27,13 +27,13 @@ export default class SectionTitleComponent extends HTMLElement {
         let title = shadow.querySelector("#title");
         
         switch (this.#location) {
-            case "/frontend/carrito.html":
+            case "/carrito":
                 title.innerHTML = "CARRITO";
                 break;
-            case "/frontend/boletoComprado.html":
+            case "/boletoComprado":
                 title.innerHTML = "Disfrute";
                 break;
-            case "/frontend/checkOut.html":
+            case "/checkOut":
                 title.innerHTML = "CheckOut";
                 break;
             default:

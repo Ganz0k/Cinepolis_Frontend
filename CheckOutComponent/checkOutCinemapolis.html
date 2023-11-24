@@ -1,17 +1,17 @@
 <link rel="stylesheet" href="./CheckOutComponent/css/checkOut.css">
 
 <div class="boleto">
-    <img src="./images/shin_godzilla.jpg" alt="pelicula" id="imagen-pelicula">
+    <img src="#" alt="?" id="imagen-pelicula">
 
     <div class="pelicula-details">
-        <h2 id="titulo">Shin Godzilla</h2>
-        <p id="sinopsis">Un monstruo misterioso emerge de la bahía de Tokio y causa estragos en Japón.</p>
+        <h2 id="titulo"></h2>
+        <p id="sinopsis"></p>
     </div>
     
     <div class="precio-details">
-        <p>Boletos agregados: <span id="total-boletos">2</span></p>
+        <p>Boletos agregados: <span id="total-boletos"></span></p>
         <p>Total:</p>
-        <h2 id="precio">$134.00</h2>
+        <h2 id="precio"></h2>
     </div>
 </div>
 
@@ -21,17 +21,17 @@
         
         <div class="metodos-container">
             <div class="metodo">
-                <input type="radio" name="metodo-pago" id="tarjeta" required>
+                <input type="radio" name="metodo-pago" id="tarjeta" value="tarjeta" required>
                 <img src="./images/tarjeta.png" alt="tarjeta">
             </div>
         
             <div class="metodo">
-                <input type="radio" name="metodo-pago" id="paypal" required>
+                <input type="radio" name="metodo-pago" id="paypal" value="paypal" required>
                 <img src="./images/paypal.png" alt="paypal">
             </div>
         </div>
 
         <button id="btn-comprar">Confirmar compra</button>
-        <button id="btn-cancelar">Cancelar</button>
     </form>
+    <button id="btn-cancelar">Cancelar</button>
 </div>
