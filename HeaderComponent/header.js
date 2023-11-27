@@ -1,3 +1,5 @@
+import CookiesService from "../services/cookiesService.js";
+
 export default class HeaderComponent extends HTMLElement {
 
     constructor() {
@@ -7,30 +9,8 @@ export default class HeaderComponent extends HTMLElement {
     async connectedCallback() {
         const shadow = this.attachShadow({ mode: "open" });
         await this.#render(shadow);
-        const location = window.location.pathname;
         this.#agregarListenerLogo(shadow);
-
-        switch (location) {
-            case "/frontend/cliente.html":
-                this.#cliente(shadow);
-                break;
-            case "/frontend/carrito.html":
-                this.#carrito(shadow);
-                break;
-            case "/frontend/admin.html":
-                this.#admin(shadow);
-                break;
-            case "/frontend/adminPelicula.html":
-                this.#admin(shadow);
-                break;
-            case "/frontend/iniciarSesion":
-                break;
-            case "/frontend/registrarse":
-                break;
-            default:
-                this.#default(shadow);
-                break;
-        }
+        this.#pintarHeader(shadow);
     }
 
     async #render(shadow) {
@@ -44,24 +24,85 @@ export default class HeaderComponent extends HTMLElement {
             });
     }
 
-    #default(shadow) {
+    #pintarHeader(shadow) {
+        let autorizacion = CookiesService.getCookie("accessToken");
+        
+        if (autorizacion !== null) {
+            const tokenParts = autorizacion.split(".");
+            const decodedPayload = JSON.parse(atob(tokenParts[1]));
+            const rol = decodedPayload.rol;
+
+            switch (rol) {
+                case "administrador":
+                    fetch(`http://127.0.0.1:3000/api/administradores/`, {
+                        headers: {
+                            "Authorization": `Bearer ${autorizacion}`
+                        }
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`Error al buscar el usuario Status: ${response.status}`);
+                            }
+
+                            return response.json();
+                        })
+                        .then(data => {
+                            this.#admin(shadow, data.nombre);
+                        })
+                        .catch(error => {
+                            alert(error);
+                            this.#defaultView(shadow);
+                        });
+                    
+                    break;
+                case "cliente":
+                    fetch(`http://127.0.0.1:3000/api/clientes`, {
+                        headers: {
+                            "Authorization": `Bearer ${autorizacion}`
+                        }
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`Error al buscar el usuario Status: ${response.status}`);
+                            }
+
+                            return response.json();
+                        })
+                        .then(data => {
+                            this.#cliente(shadow, data.nombre, autorizacion, data.idCarrito);
+                        })
+                        .catch(error => {
+                            alert(error);
+                            this.#defaultView(shadow);
+                        });
+                    
+                    break;
+            }
+
+            return;
+        }
+
+        this.#defaultView(shadow);
+    }
+
+    #defaultView(shadow) {
         let rightHeader = shadow.querySelector(".right-header");
         let btnLogin = document.createElement("button");
         btnLogin.setAttribute("id", "btn-login");
         btnLogin.innerHTML = "INICIAR SESIÓN";
 
         btnLogin.addEventListener("click", function () {
-            page("/frontend/iniciarSesion");
+            page("/iniciarSesion");
         });
 
         rightHeader.appendChild(btnLogin);
     }
 
-    #cliente(shadow) {
+    #cliente(shadow, nombre, autorizacion, idCarrito) {
         let rightHeader = shadow.querySelector(".right-header");
         let userName = shadow.querySelector(".user-name");
 
-        userName.innerHTML = "Luis Gonzalo Cervantes Rivera";
+        userName.innerHTML = nombre;
         
         let imgCarrito = document.createElement("img");
         imgCarrito.setAttribute("src", "./images/carrito.png");
@@ -70,33 +111,33 @@ export default class HeaderComponent extends HTMLElement {
 
         let montoCarrito = document.createElement("span");
         montoCarrito.setAttribute("id", "monto-carrito");
-        montoCarrito.innerHTML = "$0.00";
+
+        fetch(`http://127.0.0.1:3000/api/carritos/${idCarrito}/total`, {
+            headers: {
+                "Authorization": `Bearer ${autorizacion}`
+            }
+        })
+            .then(response => {
+                if (!response.ok) {
+                    throw new Error(`Error al buscar su carrito Status: ${response.status}`);
+                }
+
+                return response.json();
+            })
+            .then(data => {
+                montoCarrito.innerHTML = `$${data.total}.00`
+            })
+            .catch(error => {
+                alert(error);
+            });
 
         rightHeader.appendChild(montoCarrito);
     }
 
-    #carrito(shadow) {
-        let rightHeader = shadow.querySelector(".right-header");
+    #admin(shadow, nombre) {
         let userName = shadow.querySelector(".user-name");
 
-        userName.innerHTML = "Luis Gonzalo Cervantes Rivera";
-        
-        let imgCarrito = document.createElement("img");
-        imgCarrito.setAttribute("src", "./images/carrito.png");
-        imgCarrito.setAttribute("alt", "logo");
-        rightHeader.appendChild(imgCarrito);
-
-        let montoCarrito = document.createElement("span");
-        montoCarrito.setAttribute("id", "monto-carrito");
-        montoCarrito.innerHTML = "$201.00";
-
-        rightHeader.appendChild(montoCarrito);
-    }
-
-    #admin(shadow) {
-        let userName = shadow.querySelector(".user-name");
-
-        userName.innerHTML = "Admin1";
+        userName.innerHTML = nombre;
     }
 
     #agregarListenerLogo(shadow) {

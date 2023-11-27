@@ -1,3 +1,5 @@
+import CookiesService from "../services/cookiesService.js";
+
 export default class AsientoComponent extends HTMLElement {
 
     constructor() {
@@ -10,6 +12,7 @@ export default class AsientoComponent extends HTMLElement {
         this.#pintarAsientos(shadow);
         this.#seleccionarAsiento(shadow);
         this.#comprarBoleto(shadow);
+        this.#toCarrito(shadow);
     }
 
     async #render(shadow) {
@@ -96,6 +99,115 @@ export default class AsientoComponent extends HTMLElement {
             if (asientosSeleccionados !== null && asientosSeleccionados.length === parseInt(numBoletos)) {
                 page(`/checkOut?id=${idPelicula}&titulo=${titulo}&sinopsis=${sinopsis}&asientos=${asientosSeleccionados}&imagen=${imagenURL}&horario=${horario}`);
             }
+        });
+    }
+
+    #toCarrito(shadow) {
+        const urlParams = new URLSearchParams(window.location.search);
+        const idPelicula = urlParams.get("id");
+        const titulo = urlParams.get("titulo");
+        const sinopsis = urlParams.get("sinopsis");
+        const numBoletos = urlParams.get("numBoletos");
+        const imagenURL = urlParams.get("imagen");
+        const horario = urlParams.get("horario");
+        let btnToCarrito = shadow.querySelector("#btn-anadir-carrito");
+        const autorizacion = CookiesService.getCookie("accessToken");
+        
+        if (autorizacion === null) {
+            alert("Inicie sesión para poder usar el carrito de compras");
+            return;
+        }
+
+        btnToCarrito.addEventListener("click", async function () {
+            let asientosSeleccionados = Array.from(shadow.querySelectorAll(".seat-selected")).map(seat => seat.getAttribute("data-seat"));
+            
+            if (asientosSeleccionados !== null && asientosSeleccionados.length === parseInt(numBoletos)) {
+                let idCarrito;
+                let boletos = [];
+                let idsBoleto = [];
+                let fecha = new Date();
+                let partesHorario = horario.split(":");
+                fecha.setHours(partesHorario[0], 0, 0);
+
+                asientosSeleccionados.forEach(asiento => {
+                    boletos.push({
+                        idPelicula,
+                        asiento,
+                        horario: fecha,
+                        estado: "Pendiente"
+                    });
+                });
+
+                await fetch(`http://127.0.0.1:3000/api/clientes/`, {
+                    headers: {
+                        "Authorization": `Bearer ${autorizacion}`
+                    }
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Ocurrió un error al buscar su carrito Status: ${response.ok}`);
+                        }
+
+                        return response.json();
+                    })
+                    .then(data => {
+                        idCarrito = data.idCarrito;
+                    })
+                    .catch(error => {
+                        alert(error);
+                        throw error;
+                    });
+
+                for (let boleto of boletos) {
+                    await fetch(`http://127.0.0.1:3000/api/boletos`, {
+                        method: "POST",
+                        headers: {
+                            "Content-Type": "application/json"
+                        },
+                        body: JSON.stringify(boleto)
+                    })
+                        .then(response => {
+                            if (!response.ok) {
+                                throw new Error(`Error al crear el boleto Status: ${response.status}`);
+                            }
+
+                            return response.json();
+                        })
+                        .then(data => {
+                            idsBoleto.push(data._id);
+                        })
+                        .catch(error => {
+                            alert(error);
+                            throw error;
+                        });
+                }
+
+                fetch(`http://127.0.0.1:3000/api/carritos/${idCarrito}`, {
+                    method: "PUT",
+                    headers: {
+                        "Authorization": `Bearer ${autorizacion}`,
+                        "Content-Type": "application/json"
+                    },
+                    body: JSON.stringify(idsBoleto)
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Error al añadir los boletos al carrito Status: ${response.status}`);
+                        }
+
+                        return response.json();
+                    })
+                    .then(data => {
+                        page("/carrito");
+                    })
+                    .catch(error => {
+                        alert(error);
+                    });
+
+                return;
+            }
+
+            alert("Seleccione todos los asientos que quiere");
         });
     }
 }

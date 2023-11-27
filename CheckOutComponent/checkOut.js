@@ -1,3 +1,5 @@
+import CookiesService from "../services/cookiesService.js";
+
 export default class CheckOutComponent extends HTMLElement {
 
     constructor() {
