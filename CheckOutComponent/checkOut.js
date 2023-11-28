@@ -1,7 +1,7 @@
 import CookiesService from "../services/cookiesService.js";
 
 export default class CheckOutComponent extends HTMLElement {
-
+    
     constructor() {
         super();
     }
@@ -9,7 +9,7 @@ export default class CheckOutComponent extends HTMLElement {
     async connectedCallback() {
         const shadow = this.attachShadow({ mode: "open" });
         await this.#render(shadow);
-        this.#pintarBoleto(shadow);
+        await this.#pintarBoleto(shadow);
         this.#formularioPago(shadow);
     }
 
@@ -24,7 +24,7 @@ export default class CheckOutComponent extends HTMLElement {
             });
     }
 
-    #pintarBoleto(shadow) {
+    async #pintarBoleto(shadow) {
         const urlParams = new URLSearchParams(window.location.search);
         const idPelicula = urlParams.get("id");
         const titulo = urlParams.get("titulo");
@@ -76,15 +76,16 @@ export default class CheckOutComponent extends HTMLElement {
         let formulario = shadow.querySelector("#pago-form");
         let radios = formulario.querySelectorAll('input[name="metodo-pago"]');
 
-        formulario.addEventListener("submit", function (event) {
+        formulario.addEventListener("submit", async function (event) {
             event.preventDefault();
 
-            radios.forEach(radio => {
+            for (let radio of radios) {
                 if (radio.checked) {
                     let metodoPago = radio.value;
                     let fecha = new Date();
                     let partesHorario = horario.split(":");
                     fecha.setHours(partesHorario[0], 0, 0);
+                    let autorizacion = CookiesService.getCookie("accessToken");
 
                     if (asientos.includes(",")) {
                         let nomAsientos = asientos.split(",");
@@ -106,8 +107,8 @@ export default class CheckOutComponent extends HTMLElement {
                         });
                     }
 
-                    boletos.forEach(async boleto => {
-                        await fetch(`http://127.0.0.1:3000/api/boletos`, {
+                    for (let boleto of boletos) {
+                        await fetch(`http://127.0.0.1:3000/api/boletos/`, {
                             method: "POST",
                             headers: {
                                 "Content-Type": "application/json"
@@ -116,17 +117,54 @@ export default class CheckOutComponent extends HTMLElement {
                         })
                             .then(response => response.json())
                             .then(data => {
-                                boletosComprados.push(data);
+                                boletosComprados.push(data._id);
                             })
                             .catch(error => {
                                 console.error("Error al crear boletos: ", error);
                                 alert("No se pudo crear el boleto");
                             });
-                    });
+                    }
+
+                    if (autorizacion !== null) {
+                        let precio = shadow.querySelector("#precio").textContent;
+                        let precioBoletos = precio.match(/\d+/)[0];
+
+                        let pago = {
+                            monto: parseInt(precioBoletos),
+                            metodoPago: metodoPago,
+                            fechaPago: new Date(),
+                            boletos: boletosComprados
+                        };
+
+                        console.log(pago);
+
+                        await fetch(`http://127.0.0.1:3000/api/pagos/`, {
+                            method: "POST",
+                            headers: {
+                                "Authorization": `Bearer ${autorizacion}`,
+                                "Content-Type": "application/json"
+                            },
+                            body: JSON.stringify(pago)
+                        })
+                            .then(response => {
+                                if (!response.ok) {
+                                    throw new Error(`Ocurrió un error al pagar sus boletos Status: ${response.status}`);
+                                }
+
+                                return response.json();
+                            })
+                            .then(data => {
+                                alert(`Su pago de $${data.monto}.00 se ha realizado correctamente`);
+                            })
+                            .catch(error => {
+                                alert(error);
+                                throw error;
+                            });
+                    }
 
                     page(`/boletoComprado?titulo=${titulo}&asientos=${asientos}&imagen=${imagenURL}`);
                 }
-            });
+            }
         });
     }
 }
