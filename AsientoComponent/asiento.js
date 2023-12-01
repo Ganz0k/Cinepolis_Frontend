@@ -47,7 +47,7 @@ export default class AsientoComponent extends HTMLElement {
                     let timestamp = Date.parse(boleto.horario);
                     let fecha = new Date(timestamp);
 
-                    if (parseInt(horario.split(":")[0]) === fecha.getHours()) {
+                    if (parseInt(horario.split(":")[0]) === fecha.getHours() && (boleto.estado === "Pendiente" || boleto.estado === "Pagado")) {
                         let asientoOcupado = shadow.querySelector(`[data-seat="${boleto.asiento}"]`);
                         asientoOcupado.setAttribute("class", "seat-occupied");
                     }
@@ -112,6 +112,8 @@ export default class AsientoComponent extends HTMLElement {
         const horario = urlParams.get("horario");
         let btnToCarrito = shadow.querySelector("#btn-anadir-carrito");
         const autorizacion = CookiesService.getCookie("accessToken");
+        const tokenParts = autorizacion.split(".");
+        const decodedPayload = JSON.parse(atob(tokenParts[1]));
         
         if (autorizacion === null) {
             alert("Inicie sesión para poder usar el carrito de compras");
@@ -132,6 +134,7 @@ export default class AsientoComponent extends HTMLElement {
                 asientosSeleccionados.forEach(asiento => {
                     boletos.push({
                         idPelicula,
+                        idUsuario: decodedPayload.idUsuario,
                         asiento,
                         horario: fecha,
                         estado: "Pendiente"
@@ -157,9 +160,30 @@ export default class AsientoComponent extends HTMLElement {
                         alert(error);
                         throw error;
                     });
+                
+                await fetch(`http://127.0.0.1:3000/api/carritos/${idCarrito}`, {
+                    headers: {
+                        "Authorization": `Bearer ${autorizacion}`
+                    }
+                })
+                    .then(response => {
+                        if (!response.ok) {
+                            throw new Error(`Ocurrió un error con su carrito Status: ${response.status}`);
+                        }
+
+                        return response.json();
+                    })
+                    .then(data => {
+                        console.log(data);
+                        if (data.boletos.length > 0) {
+                            data.boletos.forEach(boleto => {
+                                idsBoleto.push(boleto);
+                            });
+                        }
+                    });
 
                 for (let boleto of boletos) {
-                    await fetch(`http://127.0.0.1:3000/api/boletos`, {
+                    await fetch(`http://127.0.0.1:3000/api/boletos/`, {
                         method: "POST",
                         headers: {
                             "Content-Type": "application/json"

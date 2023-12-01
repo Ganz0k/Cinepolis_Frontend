@@ -1,19 +1,6 @@
 <link rel="stylesheet" href="./CheckOutComponent/css/checkOut.css">
 
-<div class="boleto">
-    <img src="#" alt="?" id="imagen-pelicula">
-
-    <div class="pelicula-details">
-        <h2 id="titulo"></h2>
-        <p id="sinopsis"></p>
-    </div>
-    
-    <div class="precio-details">
-        <p>Boletos agregados: <span id="total-boletos"></span></p>
-        <p>Total:</p>
-        <h2 id="precio"></h2>
-    </div>
-</div>
+<div class="boleto"></div>
 
 <div class="pago">
     <form id="pago-form">
@@ -35,3 +22,18 @@
     </form>
     <button id="btn-cancelar">Cancelar</button>
 </div>
+
+<template id="boleto">
+    <img src="#" alt="?" id="imagen-pelicula">
+
+    <div class="pelicula-details">
+        <h2 id="titulo"></h2>
+        <p id="sinopsis"></p>
+    </div>
+    
+    <div class="precio-details">
+        <p>Boletos agregados: <span id="total-boletos"></span></p>
+        <p>Total:</p>
+        <h2 id="precio"></h2>
+    </div>
+</template>

@@ -107,6 +107,11 @@ export default class HeaderComponent extends HTMLElement {
         let imgCarrito = document.createElement("img");
         imgCarrito.setAttribute("src", "./images/carrito.png");
         imgCarrito.setAttribute("alt", "logo");
+
+        imgCarrito.addEventListener("click", function () {
+            page("/carrito");
+        });
+
         rightHeader.appendChild(imgCarrito);
 
         let montoCarrito = document.createElement("span");

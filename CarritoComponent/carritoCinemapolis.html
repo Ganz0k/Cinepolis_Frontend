@@ -1,5 +1,26 @@
 <link rel="stylesheet" href="./CarritoComponent/css/carrito.css">
 
+<dialog>
+    <form id="pago-form">
+        <span id="label-form">Selecciona el método de pago</span>
+        
+        <div class="metodos-container">
+            <div class="metodo">
+                <input type="radio" name="metodo-pago" id="tarjeta" value="tarjeta" required>
+                <img src="./images/tarjeta.png" alt="tarjeta">
+            </div>
+        
+            <div class="metodo">
+                <input type="radio" name="metodo-pago" id="paypal" value="paypal" required>
+                <img src="./images/paypal.png" alt="paypal">
+            </div>
+        </div>
+
+        <button id="btn-comprar">Confirmar compra</button>
+    </form>
+    <button id="btn-cancelar">Cancelar</button>
+</dialog>
+
 <div class="boletos-box"></div>
 
 <div class="buttons-box">
@@ -13,7 +34,7 @@
         <input type="checkbox">
         <img src="#" alt="#" id="imagen-pelicula">
 
-        <div class="pelicula-details">
+        <div class="pelicula-details" data-pelicula="#" data-boletos="#">
             <h2 id="titulo">?</h2>
             <p id="sinopsis">...</p>
         </div>

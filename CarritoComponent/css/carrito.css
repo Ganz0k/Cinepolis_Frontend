@@ -20,6 +20,89 @@ p {
     font-size: 16px;
 }
 
+dialog {
+    width: 486px;
+    border: 1px solid #000;
+    border-radius: 10px;
+    position: fixed;
+    top: 50%;
+    left: 40%;
+    z-index: 1;
+}
+
+dialog::backdrop{
+    position: fixed;
+    background: #22222293;
+    z-index: 1;
+    height: 100%;
+    width: 100%;
+}
+
+dialog[open],
+#backdrop {
+    animation: fade-in 250ms forwards;
+}
+
+dialog[open].close-animate,
+dialog[open].close-animate {
+    animation: fade-out 250ms forwards;
+}
+
+@keyframes fade-in {
+    0% {
+        transform: translate(-50%, -10%);
+        opacity: 0;
+    }
+
+    100% {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+}
+
+@keyframes fade-out {
+    0% {
+        transform: translate(-50%, -50%);
+        opacity: 1;
+    }
+
+    100% {
+        transform: translate(-50%, -10%);
+        opacity: 0;
+    }
+}
+
+.metodos-container {
+    display: flex;
+    padding-top: 5%;
+    padding-bottom: 5%;
+}
+
+.metodo img {
+    width: 120px;
+    height: 120px;
+}
+
+.metodo {
+    margin-left: 10%;
+}
+
+#label-form {
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 26px;
+    padding-left: 12%;
+}
+
+#btn-comprar {
+    margin-left: 30%;
+    margin-bottom: 5%;
+}
+
+#btn-cancelar {
+    margin-left: 39%;
+}
+
 .buttons-box {
     width: 928px;
     margin-left: auto;
