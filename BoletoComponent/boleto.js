@@ -22,28 +22,31 @@ export default class BoletoComponent extends HTMLElement {
     }
 
     #pintarBoleto(shadow) {
+        let div = shadow.querySelector(".boleto-container");
+        console.log(div);
+        let template = shadow.querySelector("#boletos");
+        console.log(template);
         const urlParams = new URLSearchParams(window.location.search);
-        const titulo = urlParams.get("titulo");
-        const asientos = urlParams.get("asientos");
-        const imagenURL = urlParams.get("imagen");
+        const boletosComprados = JSON.parse(urlParams.get("boletos"));
         let numAsientos;
+        let clone;
+        let element;
 
-        if (asientos.includes(",")) {
-            numAsientos = asientos.split(",").length;
-        } else {
-            numAsientos = 1;
+        for (let boleto of boletosComprados) {
+            clone = template.content.cloneNode(true);
+            element = clone.querySelector(".boleto-header img");
+            element.setAttribute("src", boleto.imagen);
+
+            element = clone.querySelector("#titulo");
+            element.textContent = boleto.titulo;
+
+            element = clone.querySelector(".total-boletos span");
+            element.textContent = `x${boleto.asientos.length}`;
+
+            element = clone.querySelector("#asientos");
+            element.textContent = boleto.asientos;
+
+            div.appendChild(clone);
         }
-
-        let imagenPelicula = shadow.querySelector(".boleto-header img");
-        imagenPelicula.setAttribute("src", imagenURL);
-
-        let campoTitulo = shadow.querySelector("#titulo");
-        campoTitulo.innerHTML = titulo;
-
-        let campoNumBoletos = shadow.querySelector(".total-boletos span");
-        campoNumBoletos.innerHTML = `x${numAsientos}`;
-
-        let campoAsientos = shadow.querySelector("#asientos");
-        campoAsientos.innerHTML = asientos;
     }
 }

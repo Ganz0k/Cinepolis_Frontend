@@ -46,8 +46,10 @@ export default class AsientoComponent extends HTMLElement {
                 data.forEach(boleto => {
                     let timestamp = Date.parse(boleto.horario);
                     let fecha = new Date(timestamp);
-
-                    if (parseInt(horario.split(":")[0]) === fecha.getHours() && (boleto.estado === "Pendiente" || boleto.estado === "Pagado")) {
+                    let fechaActual = new Date();
+                    fechaActual.setHours(parseInt(horario.split(":")), 0, 0, fecha.getMilliseconds());
+                    
+                    if (fecha.getTime() === fechaActual.getTime() && (boleto.estado === "Pendiente" || boleto.estado === "Pagado")) {
                         let asientoOcupado = shadow.querySelector(`[data-seat="${boleto.asiento}"]`);
                         asientoOcupado.setAttribute("class", "seat-occupied");
                     }

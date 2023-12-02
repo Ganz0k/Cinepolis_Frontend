@@ -162,7 +162,13 @@ export default class CheckOutComponent extends HTMLElement {
                             });
                     }
 
-                    page(`/boletoComprado?titulo=${titulo}&asientos=${asientos}&imagen=${imagenURL}`);
+                    boletosComprados = [{
+                        titulo: titulo,
+                        asientos: asientos.split(","), 
+                        imagen: imagenURL
+                    }];
+
+                    page(`/boletoComprado?boletos=${JSON.stringify(boletosComprados)}`);
                 }
             }
         });

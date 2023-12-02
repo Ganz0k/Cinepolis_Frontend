@@ -292,6 +292,7 @@ export default class CarritoComponent extends HTMLElement {
             let tipoCompra = form.getAttribute("data-how-many");
             let contadorChecks = 0;
             let boletosEnCarrito;
+            let boletosComprados = [];
 
             if (tipoCompra === "seleccionados") {
                 peliculasDetails = [];
@@ -364,6 +365,13 @@ export default class CarritoComponent extends HTMLElement {
                 let idPelicula = peliculasDetails[i].getAttribute("data-pelicula");
                 let idsBoletos = peliculasDetails[i].getAttribute("data-boletos").split(",");
                 let precio = precios[i].textContent.match(/\d+/)[0];
+                let imagen = camposBoleto[i].querySelector("img").getAttribute("src");
+
+                boletosComprados.push({
+                    titulo: peliculasDetails[i].querySelector("#titulo").textContent,
+                    asientos: [],
+                    imagen
+                });
 
                 for (let id of idsBoletos) {
                     let boleto;
@@ -379,6 +387,7 @@ export default class CarritoComponent extends HTMLElement {
                         .then(data => {
                             data.estado = "Pagado"
                             boleto = data;
+                            boletosComprados[i].asientos.push(data.asiento);
                         })
                         .catch(error => {
                             alert(error);
@@ -455,7 +464,7 @@ export default class CarritoComponent extends HTMLElement {
                     return response.json();
                 })
                 .then(data => {
-                    page("/carrito");
+                    page(`/boletoComprado?boletos=${JSON.stringify(boletosComprados)}`);
                 })
                 .catch(error => {
                     alert(error);
