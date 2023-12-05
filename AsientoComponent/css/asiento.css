@@ -6,6 +6,7 @@ button {
     font-weight: 700;
     font-family: 'Inter', sans-serif;
     margin-top: 5%;
+    cursor: pointer;
 }
 
 .pelicula-container {

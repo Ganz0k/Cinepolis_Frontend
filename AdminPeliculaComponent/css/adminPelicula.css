@@ -100,4 +100,19 @@ button {
     margin-left: 80%;
     margin-top: 5%;
     margin-bottom: 10%;
+    cursor: pointer;
+}
+
+input[type="checkbox"] {
+    cursor: pointer;
+}
+
+.drop-area {
+    border: 6px dashed #f05a28;
+    cursor: pointer;
+    transition: border-color 0.3s ease-in-out;
+}
+
+.drop-area.drag-over {
+    border-color: #4caf50;
 }

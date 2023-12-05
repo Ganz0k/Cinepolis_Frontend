@@ -1,9 +1,26 @@
 <link rel="stylesheet" href="./CarteleraComponent/css/cartelera.css">
 
-<div class="cartelera"></div>
+<div class="menu">
+    <div class="cartelera"></div>
+    <div class="opciones">
+        <button id="btn-aniadir">Añadir Película</button>
+        <br>
+        <button id="btn-actualizar">Actualizar Película</button>
+        <br>
+        <button id="btn-eliminar">Eliminar Película</button>
+        <br>
+    </div>
+</div>
 
 <template id="tem-cartelera">
     <a href="#" class="movie">
         <img src="#" alt="?">
     </a>
+</template>
+
+<template id="tem-admin">
+    <div class="movie">
+        <input type="radio" name="pelicula">
+        <img src="#" alt="?">
+    </div>
 </template>

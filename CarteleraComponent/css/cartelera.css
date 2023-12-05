@@ -1,3 +1,11 @@
+input {
+    cursor: pointer;
+}
+
+.menu {
+    display: flex;
+}
+
 .cartelera {
     display: flex;
     flex-wrap: wrap;
@@ -27,4 +35,27 @@
 
 .cartelera .movie:hover {
     background-color: #f0f0f0;
+}
+
+.opciones {
+    display: none;
+}
+
+.opciones button {
+    background-color: #EEC233;
+    color: #000;
+    font-family: 'Inter', sans-serif;
+    font-size: 15px;
+    font-weight: 700;
+    margin-top: 20px;
+    border-radius: 5px;
+    cursor: pointer;
+}
+
+#btn-aniadir {
+    margin-left: 8%;
+}
+
+#btn-eliminar {
+    margin-left: 5%;
 }

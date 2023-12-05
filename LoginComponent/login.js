@@ -43,16 +43,7 @@ export default class LoginComponent extends HTMLElement {
                 })
                 .then(data => {
                     CookiesService.setCookie("accessToken", data.accessToken, 1);
-                    const tokenParts = data.accessToken.split(".");
-                    const decodedPayload = JSON.parse(atob(tokenParts[1]));
-                    const rol = decodedPayload.rol;
-
-                    if (rol === "cliente") {
-                        page("/index.html");
-                    } else {
-                        page("/admin");
-                    }
-                    
+                    page("/index.html");
                 })
                 .catch(error => {
                     alert(error);

@@ -2,14 +2,17 @@
 
 <div class="pelicula-container">
     <div class="image-editor">
-        <img src="./images/shin_godzilla.jpg" id="imagen">
-        <br>
-        <br>
-        <label class="custom-upload-button">
-            <input type="file" id="pelicula-imagen" accept="image/*">
-            Seleccionar imagen
-        </label>
-
+        <div class="drop-area">
+            <img src="#" id="imagen">
+            <br>
+            <span>Arrastra y suelta aquí</span>
+            <br>
+            <br>
+            <label class="custom-upload-button">
+                <input type="file" id="pelicula-imagen" accept="image/*">
+                Seleccionar imagen
+            </label>
+        </div>
     </div>
 
     <div class="pelicula-details">
@@ -25,7 +28,7 @@
 
         <div class="sections">
             <div class="label">Precio de boleto: </div>
-            <input type="text" id="precio" placeholder="Precio">
+            <input type="number" id="precio" placeholder="Precio">
         </div>
 
         <div id="horarios">
@@ -33,48 +36,48 @@
             <table>
                 <tr>
                     <td>
-                        <input type="checkbox" name="horario"> 10:00
+                        <input type="checkbox" name="horario" value="10:00"> 10:00
                     </td>
                     <td>
-                        <input type="checkbox" name="horario"> 11:00
+                        <input type="checkbox" name="horario" value="11:00"> 11:00
                     </td>
                     <td>
-                        <input type="checkbox" name="horario"> 12:00
+                        <input type="checkbox" name="horario" value="12:00"> 12:00
                     </td>
                     <td>
-                        <input type="checkbox" name="horario"> 13:00
+                        <input type="checkbox" name="horario" value="13:00"> 13:00
                     </td>
                     <td>
-                        <input type="checkbox" name="horario"> 14:00
+                        <input type="checkbox" name="horario" value="14:00"> 14:00
                     </td>
                     <td>
-                        <input type="checkbox" name="horario"> 15:00
+                        <input type="checkbox" name="horario" value="15:00"> 15:00
                     </td>
                     <td>
-                        <input type="checkbox" name="horario"> 16:00
+                        <input type="checkbox" name="horario" value="16:00"> 16:00
                     </td>
                 </tr>
                 <tr>
                     <td>
-                        <input type="checkbox" name="horario"> 17:00
+                        <input type="checkbox" name="horario" value="17:00"> 17:00
                     </td>
                     <td>
-                        <input type="checkbox" name="horario"> 18:00
+                        <input type="checkbox" name="horario" value="18:00"> 18:00
                     </td>
                     <td>
-                        <input type="checkbox" name="horario"> 19:00
+                        <input type="checkbox" name="horario" value="19:00"> 19:00
                     </td>
                     <td>
-                        <input type="checkbox" name="horario"> 20:00
+                        <input type="checkbox" name="horario" value="20:00"> 20:00
                     </td>
                     <td>
-                        <input type="checkbox" name="horario"> 21:00
+                        <input type="checkbox" name="horario" value="21:00"> 21:00
                     </td>
                     <td>
-                        <input type="checkbox" name="horario"> 22:00
+                        <input type="checkbox" name="horario" value="22:00"> 22:00
                     </td>
                     <td>
-                        <input type="checkbox" name="horario"> 23:00
+                        <input type="checkbox" name="horario" value="23:00"> 23:00
                     </td>
                 </tr>
             </table>

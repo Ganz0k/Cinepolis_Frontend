@@ -49,6 +49,7 @@ button {
     font-size: 32px;
     font-weight: 700;
     margin-left: 221px;
+    cursor: pointer;
 }
 
 #username {

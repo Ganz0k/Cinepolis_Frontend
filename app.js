@@ -10,7 +10,6 @@ import AsientoComponent from "./AsientoComponent/asiento.js";
 import AdminPeliculaComponent from "./AdminPeliculaComponent/adminPelicula.js";
 import BoletoComponent from "./BoletoComponent/boleto.js";
 import CheckOutComponent from "./CheckOutComponent/checkOut.js";
-import AdminMenuComponent from "./AdminMenuComponent/adminMenu.js";
 
 document.addEventListener("DOMContentLoaded", function () {
     page("/index.html", () => showCartelera());
@@ -21,6 +20,7 @@ document.addEventListener("DOMContentLoaded", function () {
     page("/checkOut", () => showCheckOut());
     page("/boletoComprado", () => showBoletoComprado());
     page("/carrito", () => showCarrito());
+    page("/adminPelicula", () => showAdminPelicula());
 
     page();
 });
@@ -125,6 +125,18 @@ function showCarrito() {
     `;
 }
 
+function showAdminPelicula() {
+    const body = document.querySelector("body");
+
+    body.innerHTML = `  
+        <header-info></header-info>
+
+        <administrar-pelicula></administrar-pelicula>
+
+        <footer-info></footer-info>
+    `;
+}
+
 window.customElements.define("header-info", HeaderComponent);
 window.customElements.define("footer-info", FooterComponent);
 window.customElements.define("login-form", LoginComponent);
@@ -137,4 +149,3 @@ window.customElements.define("administrar-pelicula", AdminPeliculaComponent);
 window.customElements.define("cartelera-info", CarteleraComponent);
 window.customElements.define("boleto-info", BoletoComponent);
 window.customElements.define("check-out", CheckOutComponent);
-window.customElements.define("admin-menu", AdminMenuComponent);

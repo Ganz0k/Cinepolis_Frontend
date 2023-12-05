@@ -41,12 +41,14 @@ header img {
     font-size: 15px;
     font-weight: 700;
     margin-top: 20px;
+    cursor: pointer;
 }
 
 .right-header img {
     width: 79px;
     height: 79px;
     object-fit: contain;
+    cursor: pointer;
 }
 
 #monto-carrito {

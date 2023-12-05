@@ -9,7 +9,7 @@ export default class CheckOutComponent extends HTMLElement {
     async connectedCallback() {
         const shadow = this.attachShadow({ mode: "open" });
         await this.#render(shadow);
-        await this.#pintarBoletos(shadow);
+        await this.#pintarBoleto(shadow);
         this.#formularioPago(shadow);
     }
 
@@ -24,7 +24,7 @@ export default class CheckOutComponent extends HTMLElement {
             });
     }
 
-    async #pintarBoletos(shadow) {
+    async #pintarBoleto(shadow) {
         const urlParams = new URLSearchParams(window.location.search);
         const idPelicula = urlParams.get("id");
         const titulo = urlParams.get("titulo");

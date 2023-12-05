@@ -5,6 +5,11 @@ button {
     font-size: 20px;
     font-weight: 700;
     font-family: 'Inter', sans-serif;
+    cursor: pointer;
+}
+
+input {
+    cursor: pointer;
 }
 
 h2 {
